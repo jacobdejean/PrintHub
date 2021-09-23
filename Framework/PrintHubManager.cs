@@ -20,6 +20,16 @@ namespace Framework
             _validator = new StateValidator(this);
         }
 
+        public void AddPrinter(string name)
+        {
+            Printers.Add(new Printer(name, Printers.Count));
+        }
+
+        public void RemovePrinter(int ID)
+        {
+            Printers.RemoveAll((p) => p.ID == ID);
+        }
+
         public void TrackFile(string name, int PrinterRestriction)
         {
             if(!_validator.ValidateTrack(name))
