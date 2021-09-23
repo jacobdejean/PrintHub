@@ -95,9 +95,9 @@ namespace Framework
             return Results;
         }
         
-        public void Validate()
+        public bool ValidateTrack(string name)
         {
-
+            return _validator.ValidateTrack(name);
         }
     }
 }
