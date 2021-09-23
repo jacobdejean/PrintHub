@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Framework
 {
@@ -7,7 +9,8 @@ namespace Framework
         public string Name;
         public int Version;
         public int PrinterRestriction;
-        
+        public GcodeStream LinkedStream;
+
         public PrintFile(string Name)
         {
             this.Name = Name;
@@ -25,6 +28,30 @@ namespace Framework
             this.Version = Version;
             this.PrinterRestriction = PrinterRestriction;
         }
+
+        public void LinkFile(string path)
+        {
+            LinkedStream = new GcodeStream(GetFileName(), ReadFile(path));
+        }
+
+        public Func<string, MemoryStream> ReadFile = (s) => 
+        {
+            Console.WriteLine("Reading bytes from path...");
+
+            MemoryStream result = new MemoryStream();
+            byte[] data = File.ReadAllBytes(s);
+
+            Console.WriteLine("Writing data to stream...");
+            for(int i = 0; i < data.Length; i++)
+            {
+                result.WriteByte(data[i]);
+            }
+
+            result.Seek(0, SeekOrigin.Begin);
+            Console.WriteLine("Finished copying data");
+
+            return result;
+        };
 
         public string GetFileName()
         {

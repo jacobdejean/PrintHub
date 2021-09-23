@@ -106,6 +106,31 @@ namespace PrintHub
                         Console.WriteLine("Removed Printer.");
                         break;
                     };
+                    case "-trackfile":
+                    {
+                        Console.WriteLine("Enter part name:");
+                        string name = Console.ReadLine();
+                        Console.WriteLine("Enter printer restriction ID:");
+                        int restriction = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Started tracking file {0}. Use -linkfile to link gcode to this tracked file.");
+                        break;
+                    };
+                     case "-linkfile":
+                    {
+                        Console.WriteLine("Enter part name:");
+                        string name = Console.ReadLine();
+                        if(manager.ValidateTrack(name))
+                        {
+                            Console.WriteLine("Enter full path to file:");
+                            string path = Console.ReadLine();
+                            manager.GetTrackedFile(name).LinkFile(path);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Part name not found. Use -display to see a list of all tracked files, or -search to narrow down a specific one.");
+                        }
+                        break;
+                    };
                     case "-quit":
                     {
                         Console.WriteLine("Quit");
