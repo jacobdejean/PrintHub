@@ -58,8 +58,7 @@ namespace PrintHub
                     };
                     case "-display":
                     {
-                        Console.WriteLine("Current Manager State:");
-                        Console.WriteLine("Printers:");
+                        Console.WriteLine("Current Manager State:\nPrinters:");
                         foreach(Printer p in manager.Printers)
                             Console.WriteLine("  -{0}~{1}", p.PrinterModel, p.ID);
 
@@ -72,7 +71,7 @@ namespace PrintHub
                             Console.WriteLine("  -Name: {0} Version: {1} Restriction: {2}", a.Name, a.Version, a.PrinterRestriction);
                         break;
                     };
-                     case "-search":
+                    case "-search":
                     {
                         Console.WriteLine("Enter Name (Leave blank to omit):");
                         string name = Console.ReadLine();
@@ -85,13 +84,26 @@ namespace PrintHub
                         term.Name = name;
                         term.Version = version;
                         term.PrinterRestriction = restriction;
-                        Console.WriteLine(restriction);
 
                         List<PrintFile> results = manager.GetArchivedFiles(term);
                         foreach(PrintFile f in results)
                         {
                             Console.WriteLine(f.GetFileName());
                         }
+                        break;
+                    };
+                    case "-addprinter":
+                    {
+                        Console.WriteLine("Enter full brand and model name:");
+                        manager.AddPrinter(Console.ReadLine());
+                        Console.WriteLine("Added Printer.");
+                        break;
+                    };
+                    case "-removeprinter":
+                    {
+                        Console.WriteLine("Enter ID:");
+                        manager.AddPrinter(Console.ReadLine());
+                        Console.WriteLine("Removed Printer.");
                         break;
                     };
                     case "-quit":
