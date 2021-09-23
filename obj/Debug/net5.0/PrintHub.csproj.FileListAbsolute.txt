@@ -1,0 +1,16 @@
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\PrintHub.exe
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\PrintHub.deps.json
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\PrintHub.runtimeconfig.json
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\PrintHub.runtimeconfig.dev.json
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\PrintHub.dll
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\ref\PrintHub.dll
+C:\Users\jacob\Documents\Projects\PrintHub\bin\Debug\net5.0\PrintHub.pdb
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.csproj.AssemblyReference.cache
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.AssemblyInfoInputs.cache
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.AssemblyInfo.cs
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.dll
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\ref\PrintHub.dll
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.pdb
+C:\Users\jacob\Documents\Projects\PrintHub\obj\Debug\net5.0\PrintHub.genruntimeconfig.cache
