@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Framework.Validation;
+using PrintHub.Framework.Validation;
+using PrintHub.Framework.Logging;
 
-namespace Framework
+namespace PrintHub.Framework
 {
     class PrintHubManager
     {
@@ -63,33 +64,19 @@ namespace Framework
                 bool invalid = false;
 
                 if(!string.IsNullOrEmpty(search.Name))
-                {
                     if(!search.Name.Equals(file.Name))
-                    {
                         invalid = true;
-                    }
-                }
 
                 if(!string.IsNullOrEmpty(search.Version))
-                {
                     if(!search.Version.Equals(file.Version.ToString()))
-                    {
                         invalid = true;
-                    }
-                }
 
                 if(search.PrinterRestriction != -1)
-                {
                     if(search.PrinterRestriction != file.PrinterRestriction)
-                    {
                         invalid = true;
-                    }
-                }
 
                 if(!invalid)
-                {
                     Results.Add(file);
-                }
             }
 
             return Results;
@@ -98,9 +85,9 @@ namespace Framework
         public void LinkFile(string name, string path)
         {
             if(_validator.ValidateTrack(name))
-            {
                 GetTrackedFile(name).LinkFile(path);
-            }
+            else
+                Logger.PostLog(Severity.Error, "File with given name does not exist.");
         }
     }
 }

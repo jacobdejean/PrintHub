@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 
-namespace Framework.Logging
+namespace PrintHub.Framework.Logging
 {
     class Log
     {
         public Severity Severity;
         public string Message;
-        public Exception? Exception;
+        public Exception Exception;
         public DateTime Timestamp;
 
-        public Log(Severity severity, string message, Exception? exception = null)
+        public Log(Severity severity, string message, Exception exception = null)
         {
             Severity = severity;
             Message = message;

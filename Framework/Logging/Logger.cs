@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace Framework.Logging
+namespace PrintHub.Framework.Logging
 {
     class Logger
     {
         public static List<Log> Logs = new List<Log>();
         public static bool Verbose = true;
 
-        public static void PostLog(Severity severity, string message, Exception exception)
+        public static void PostLog(Severity severity, string message, Exception exception = null)
         {
             Logs.Add(new Log(severity, message, exception));
 

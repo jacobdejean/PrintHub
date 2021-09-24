@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Framework.Logging
+namespace PrintHub.Framework.Logging
 {
     public enum Severity
     {

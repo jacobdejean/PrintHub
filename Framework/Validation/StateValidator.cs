@@ -1,6 +1,6 @@
 using System;
 
-namespace Framework.Validation
+namespace PrintHub.Framework.Validation
 {
     class StateValidator
     {

@@ -1,8 +1,9 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using PrintHub.Framework.Logging;
 
-namespace Framework
+namespace PrintHub.Framework
 {
     class PrintFile
     {
@@ -10,6 +11,7 @@ namespace Framework
         public int Version;
         public int PrinterRestriction;
         public GcodeStream LinkedStream;
+        public bool LinkedToStream;
 
         public PrintFile(string Name)
         {
@@ -29,30 +31,6 @@ namespace Framework
             this.PrinterRestriction = PrinterRestriction;
         }
 
-        public void LinkFile(string path)
-        {
-            LinkedStream = new GcodeStream(GetFileName(), ReadFile(path));
-        }
-
-        public Func<string, MemoryStream> ReadFile = (s) => 
-        {
-            Console.WriteLine("Reading bytes from path...");
-
-            MemoryStream result = new MemoryStream();
-            byte[] data = File.ReadAllBytes(s);
-
-            Console.WriteLine("Writing data to stream...");
-            for(int i = 0; i < data.Length; i++)
-            {
-                result.WriteByte(data[i]);
-            }
-
-            result.Seek(0, SeekOrigin.Begin);
-            Console.WriteLine("Finished copying data");
-
-            return result;
-        };
-
         public string GetFileName()
         {
             return Name + "_" + Version + "_" + PrinterRestriction;
@@ -62,6 +40,51 @@ namespace Framework
         {
             return search.Name + "_" + search.Version + "_" + search.PrinterRestriction;
         }
+
+        public void LinkFile(string path)
+        {
+            if(LinkedToStream)
+            {
+                Logger.PostLog(Severity.Warning, "Attempt to overwrite an existing link was blocked.");
+            }
+            else
+            {
+                LinkedStream = new GcodeStream(GetFileName(), ReadFile(path));
+
+                LinkedToStream = LinkedStream.Stream != null;
+            }
+        }
+
+        public MemoryStream ReadFile(string path) 
+        {
+            MemoryStream result = new MemoryStream();
+            byte[] data = GetData(path);
+
+            if(data == null)
+                return new MemoryStream();
+
+            for(int i = 0; i < data.Length; i++)
+                result.WriteByte(data[i]);
+
+            result.Seek(0, SeekOrigin.Begin);
+
+            return result;
+        }
+
+        public byte[] GetData(string path)
+        {
+            try
+            {
+                return File.ReadAllBytes(path);
+            }
+            catch(Exception e)
+            {
+                Logger.PostLog(Severity.Error, "Error while reading byte data.", e);
+                return null;
+            }
+        }
+
+        
 
         public PrintFile Copy()
         {
