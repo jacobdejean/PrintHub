@@ -94,10 +94,13 @@ namespace Framework
 
             return Results;
         }
-        
-        public bool ValidateTrack(string name)
+
+        public void LinkFile(string name, string path)
         {
-            return _validator.ValidateTrack(name);
+            if(_validator.ValidateTrack(name))
+            {
+                GetTrackedFile(name).LinkFile(path);
+            }
         }
     }
 }
