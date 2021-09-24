@@ -11,6 +11,7 @@ namespace PrintHub.Framework
         public List<PrintFile> TrackedFiles;
         public List<PrintFile> ArchivedFiles;
         private StateValidator _validator;
+        public bool QuitFlag;
 
         public PrintHubManager() 
         {
