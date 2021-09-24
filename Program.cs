@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Framework;
+using PrintHub.Framework;
 
 namespace PrintHub
 {
@@ -80,7 +80,14 @@ namespace PrintHub
                         string version = Console.ReadLine();
 
                         Console.WriteLine("Enter Restriction (-1 to omit):");
-                        int restriction = int.Parse(Console.ReadLine());
+                        int restriction;
+
+                    restrictionentry:
+                        if(!int.TryParse(Console.ReadLine(), out restriction))
+                        {
+                            Console.WriteLine("Enter a valid restriction ID (-1 to omit from search):");
+                            goto restrictionentry;
+                        }
 
                         SearchTerm term = new SearchTerm()
                         {
@@ -109,8 +116,16 @@ namespace PrintHub
                     case "-removeprinter":
                     {
                         Console.WriteLine("Enter ID:");
+                        int id;
 
-                        manager.AddPrinter(Console.ReadLine());
+                    restrictionentry:
+                        if(!int.TryParse(Console.ReadLine(), out id))
+                        {
+                            Console.WriteLine("Enter a valid ID:");
+                            goto restrictionentry;
+                        }
+
+                        manager.RemovePrinter(id);
 
                         Console.WriteLine("Removed Printer.");
 
@@ -135,16 +150,11 @@ namespace PrintHub
                         Console.WriteLine("Enter part name:");
                         string name = Console.ReadLine();
 
-                        if(manager.ValidateTrack(name))
-                        {
-                            Console.WriteLine("Enter full path to file:");
-                            string path = Console.ReadLine();
-                            manager.GetTrackedFile(name).LinkFile(path);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Part name not found. Use -display to see a list of all tracked files, or -search to narrow down a specific one.");
-                        }
+                        Console.WriteLine("Enter full path to file:");
+                        string path = Console.ReadLine();
+                        
+                        manager.LinkFile(name, path);
+                        
                         break;
                     };
                     case "-quit":
