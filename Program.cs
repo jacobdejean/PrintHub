@@ -75,50 +75,66 @@ namespace PrintHub
                     {
                         Console.WriteLine("Enter Name (Leave blank to omit):");
                         string name = Console.ReadLine();
+
                         Console.WriteLine("Enter Version (Leave blank to omit):");
                         string version = Console.ReadLine();
+
                         Console.WriteLine("Enter Restriction (-1 to omit):");
                         int restriction = int.Parse(Console.ReadLine());
 
-                        SearchTerm term;
-                        term.Name = name;
-                        term.Version = version;
-                        term.PrinterRestriction = restriction;
+                        SearchTerm term = new SearchTerm()
+                        {
+                            Name = name,
+                            Version = version,
+                            PrinterRestriction = restriction
+                        };
 
-                        List<PrintFile> results = manager.GetArchivedFiles(term);
-                        foreach(PrintFile f in results)
+                        foreach(PrintFile f in  manager.GetArchivedFiles(term))
                         {
                             Console.WriteLine(f.GetFileName());
                         }
+
                         break;
                     };
                     case "-addprinter":
                     {
                         Console.WriteLine("Enter full brand and model name:");
+
                         manager.AddPrinter(Console.ReadLine());
+
                         Console.WriteLine("Added Printer.");
+
                         break;
                     };
                     case "-removeprinter":
                     {
                         Console.WriteLine("Enter ID:");
+
                         manager.AddPrinter(Console.ReadLine());
+
                         Console.WriteLine("Removed Printer.");
+
                         break;
                     };
                     case "-trackfile":
                     {
                         Console.WriteLine("Enter part name:");
                         string name = Console.ReadLine();
+
                         Console.WriteLine("Enter printer restriction ID:");
                         int restriction = int.Parse(Console.ReadLine());
+
+                        manager.TrackFile(name, restriction);
+
                         Console.WriteLine("Started tracking file {0}. Use -linkfile to link gcode to this tracked file.");
+                        
                         break;
                     };
-                     case "-linkfile":
+                    case "-linkfile":
                     {
                         Console.WriteLine("Enter part name:");
                         string name = Console.ReadLine();
+
                         if(manager.ValidateTrack(name))
                         {
                             Console.WriteLine("Enter full path to file:");
