@@ -13,10 +13,10 @@ namespace PrintHub.Framework.Commands
                 Console.WriteLine("Usage Information: ");
                 foreach(KeyValuePair<string, Command> kvp in CommandDeclarations.Commands)
                 {
-                    Console.WriteLine("Command: " + kvp.Key);
+                    Console.WriteLine(kvp.Key + ": " + kvp.Value.Description);
                     for(int i = 0; i < kvp.Value.ParameterTokens.Length; i++)
                     {
-                        Console.WriteLine("    {}: {1}", kvp.Value.ParameterTokens[i], kvp.Value.ParameterDescriptions[i]);
+                        Console.WriteLine("    {0}: {1}", kvp.Value.ParameterTokens[i], kvp.Value.ParameterDescriptions[i]);
                     }
                 }
             };
