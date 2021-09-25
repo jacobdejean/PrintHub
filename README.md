@@ -7,6 +7,7 @@
 1. Commandline feature complete
 2. GUI Conversion
 3. Implementation on hardware
+4. Team collaboration
 
 ## Developer Features
 - Extensible command palatte
@@ -16,5 +17,5 @@
 
 ## Usage / User Features
 ### Commands
-'display -tracked -archived -all'
+`display -tracked -archived -all`
 
