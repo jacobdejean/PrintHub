@@ -4,9 +4,9 @@
  In active feature development.
 
 ## Roadmap
-- Commandline Feature complete
-- GUI Conversion
-- Implementation on hardware
+1. Commandline Feature complete
+2. GUI Conversion
+3. Implementation on hardware
 
 ## Developer Features:
 - Extensible command palatte
