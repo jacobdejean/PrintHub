@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KhqixA3B4Git7mK9yTqqOyiOhxkgH8lyyF8L/2I3y2+ygRneuva6HpP7AtYIq22Hwq4n2MPyTQ+gPOp78TsWKA==",
+  "dgSpecHash": "BqDtPcGJpxTtXK9JBTuk+7w1RNcq/Mi3PT8BsXiUxGr2y7ZpDbsz5BYBFQ7g70kmF2aomd8HfClQLnq15UPwdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jacob\\Documents\\Projects\\PrintHub\\PrintHub.csproj",
+  "projectFilePath": "/Users/jacobdejean/Documents/PrintHub/PrintHub.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
