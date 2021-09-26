@@ -13,6 +13,7 @@ namespace PrintHub.Framework.Validation
 
         public bool ValidateTrack(string name)
         {
+            //return State.TrackedFiles.Exists((p) => p.Name.Equals(name));
             return State.TrackedFiles.Exists((p) => p.Name.Equals(name));
         }
     }

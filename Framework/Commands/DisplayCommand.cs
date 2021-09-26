@@ -18,13 +18,19 @@ namespace PrintHub.Framework.Commands
             };
             Operation = (manager, parameters) => 
             {
-                Console.WriteLine("Current Manager State:");
+                WhiteBack();
+                Console.WriteLine("    {0,-30}    ", "[Display] Current Manager State");
+                BlackBack();
 
                 if (parameters.Contains("-printers") || parameters.Contains("-all"))
                 {
-                    Console.WriteLine("Printers:");
+                    Console.Write("Printers:");
                     foreach (Printer p in manager.Printers)
-                        Console.WriteLine("  -{0}~{1}", p.PrinterModel, p.ID);
+                                         //Printers:
+                        Console.WriteLine("                    -{0}~{1}", p.PrinterModel, p.ID);
+                    
+                    if(manager.Printers.Count == 0)
+                        Console.WriteLine("No printers found.");
                 }
 
                 if (parameters.Contains("-tracked") || parameters.Contains("-all"))
@@ -32,6 +38,9 @@ namespace PrintHub.Framework.Commands
                     Console.WriteLine("Tracked Files:");
                     foreach (PrintFile t in manager.TrackedFiles)
                         Console.WriteLine("  -Name: {0} Version: {1} Restriction: {2}", t.Name, t.Version, t.PrinterRestriction);
+
+                    if(manager.TrackedFiles.Count == 0)
+                        Console.WriteLine("No files tracked.");
                 }
 
                 if (parameters.Contains("-archived") || parameters.Contains("-all"))
@@ -39,8 +48,26 @@ namespace PrintHub.Framework.Commands
                     Console.WriteLine("Archived Files:");
                     foreach (PrintFile a in manager.ArchivedFiles)
                         Console.WriteLine("  -Name: {0} Version: {1} Restriction: {2}", a.Name, a.Version, a.PrinterRestriction);
+                
+                    if(manager.ArchivedFiles.Count == 0)
+                        Console.WriteLine("No archived files.");
                 }
+
+                Console.WriteLine("[Any] to return operation selection");
+
+                Console.ReadKey();
             };
+        }
+
+        public void WhiteBack()
+        {
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.White;
+        }
+
+        public void BlackBack()
+        {
+            Console.ResetColor();   
         }
     }
 }
