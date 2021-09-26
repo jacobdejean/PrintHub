@@ -18,7 +18,8 @@ namespace PrintHub.Framework.Commands
                 new KeyValuePair<string, Command>("display", new DisplayCommand()),
                 new KeyValuePair<string, Command>("search", new SearchCommand()),
                 new KeyValuePair<string, Command>("printer", new PrinterCommand()),
-                new KeyValuePair<string, Command>("file", new FileCommand())
+                new KeyValuePair<string, Command>("file", new FileCommand()),
+                new KeyValuePair<string, Command>("home", new HomeCommand())
             });
         }
     }
