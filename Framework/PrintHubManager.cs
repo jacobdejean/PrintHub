@@ -90,5 +90,10 @@ namespace PrintHub.Framework
             else
                 Logger.PostLog(Severity.Error, "File with given name does not exist.");
         }
+
+        public StateValidator GetValidator()
+        {
+            return _validator;
+        }
     }
 }

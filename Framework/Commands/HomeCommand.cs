@@ -23,7 +23,7 @@ namespace PrintHub.Framework.Commands
                 {
                     Console.Clear();
                     WhiteBack();
-                    Console.WriteLine("    [Home] Choose an operation below    ");
+                    Console.WriteLine("    {0,-30}    ","[Home] Choose an operation below");
                     BlackBack();
                     
                     for(int x = 0; x < operations.GetLength(0); x++)
@@ -68,11 +68,11 @@ namespace PrintHub.Framework.Commands
                             if(cmd.ParameterTokens.Length > 0)
                             {
                                 WhiteBack();
-                                Console.WriteLine("Parameters: ");
+                                Console.WriteLine("    {0,-30}    ","[Parameters] Enter operation parameters");
                                 BlackBack();
 
                                 Console.WriteLine(string.Join(' ', cmd.ParameterTokens));
-                                Console.Write("Enter parameters: ");
+                                Console.Write("~: ");
 
                                 string[] input = Console.ReadLine().Split(' ');
                                 Console.ResetColor();
@@ -90,12 +90,9 @@ namespace PrintHub.Framework.Commands
                             CommandDeclarations.Commands[operations[selectedX, selectedY]].Operation(manager, p);
                             
                             WhiteBack();
-                            Console.WriteLine("[Esc] to return operation selection");
+                            Console.WriteLine("[Any] to return operation selection");
                             BlackBack();
-                            if(Console.ReadKey().Key == ConsoleKey.Escape)
-                            {
-                                ;
-                            }
+                            Console.ReadKey();
 
                             break;
                         }
