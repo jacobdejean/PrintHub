@@ -13,7 +13,7 @@ namespace PrintHub.Framework.Commands.GUI
         public int SelectedY;
         public bool ExitPage;
         public bool WaitOnInfo;
-        public bool IncludeBranding;
+        public bool IncludeBranding = true;
         private string _branding = @"  _                     " + "\n" + @" /_/ _ . _ _/_ /_/    /_" + "\n" + @"/   / / / //  / / /_//_/ by Jacob DeJean";
 
         public Page(PageLayout Layout, string ContentFormatting, string[,,] Contents)
@@ -47,7 +47,6 @@ namespace PrintHub.Framework.Commands.GUI
 
             while (!ExitPage)
             {
-                Console.ResetColor();
                 Console.Clear();
 
                 if (IncludeBranding)

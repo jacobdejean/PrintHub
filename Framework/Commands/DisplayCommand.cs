@@ -18,9 +18,8 @@ namespace PrintHub.Framework.Commands
             };
             Operation = (manager, parameters) => 
             {
-                WhiteBack();
                 Console.WriteLine("    {0,-30}    ", "[Display] Current Manager State");
-                BlackBack();
+                
 
                 if (parameters.Contains("-printers") || parameters.Contains("-all"))
                 {
@@ -57,17 +56,6 @@ namespace PrintHub.Framework.Commands
 
                 Console.ReadKey();
             };
-        }
-
-        public void WhiteBack()
-        {
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.BackgroundColor = ConsoleColor.White;
-        }
-
-        public void BlackBack()
-        {
-            Console.ResetColor();   
         }
     }
 }
