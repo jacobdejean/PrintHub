@@ -8,29 +8,36 @@ namespace PrintHub.Framework.Commands
         public HomeCommand()
         {
             ParameterTokens = new string[] { };
-            Operation = (manager, parameters) => 
+            Operation = (manager, parameters) =>
             {
-                string[,] operations = new string[,] 
-                    { 
-                    { "help", "display", "test" }, 
+                string[,] operations = new string[,]
+                    {
+                    { "help", "display", "test" },
                     { "search", "file", "printer" },
                     { "quit", "b", "b" }
                     };
                 int selectedX = 0, selectedY = 0;
                 bool commandSelected = false;
+                bool KeyTyped = false;
 
-                while(!commandSelected)
+                while (!commandSelected)
                 {
                     Console.Clear();
+                    Console.WriteLine(@"  
+  _                     
+ /_/ _ . _ _/_ /_/    /_
+/   / / / //  / / /_//_/ by Jacob DeJean
+                        ");
+
                     WhiteBack();
-                    Console.WriteLine("    {0,-30}    ","[Home] Choose an operation below");
+                    Console.WriteLine("    {0,-30}    ", "[Home] Choose an operation below");
                     BlackBack();
-                    
-                    for(int x = 0; x < operations.GetLength(0); x++)
+
+                    for (int x = 0; x < operations.GetLength(0); x++)
                     {
-                        for(int y = 0; y < operations.GetLength(1); y++)
+                        for (int y = 0; y < operations.GetLength(1); y++)
                         {
-                            if(selectedX == x && selectedY == y)
+                            if (selectedX == x && selectedY == y && !KeyTyped)
                                 WhiteBack();
                             else
                                 BlackBack();
@@ -40,13 +47,37 @@ namespace PrintHub.Framework.Commands
                         Console.Write("\n");
                     }
 
+
                     Console.ForegroundColor = ConsoleColor.DarkGray;
+                    if (KeyTyped)
+                        WhiteBack();
                     Console.Write("Or type command: ");
                     BlackBack();
 
-                    ConsoleKey key = Console.ReadKey().Key;
-                    
-                    switch(key)
+
+                    ConsoleKey key = ConsoleKey.Clear;
+
+                    if (KeyTyped)
+                    {
+                        string commandTyped = Console.ReadLine();
+                        for (int x = 0; x < operations.GetLength(0); x++)
+                        {
+                            for (int y = 0; y < operations.GetLength(1); y++)
+                            {
+                                if (commandTyped.Equals(operations[x, y]))
+                                {
+                                    selectedX = x;
+                                    selectedY = y;
+                                    key = ConsoleKey.Enter;
+                                    KeyTyped = false;
+                                }
+                            }
+                        }
+                    }
+                    else
+                        key = Console.ReadKey().Key;
+
+                    switch (key)
                     {
                         case ConsoleKey.UpArrow:
                             selectedX -= selectedX > 0 ? 1 : 0;
@@ -61,48 +92,49 @@ namespace PrintHub.Framework.Commands
                             selectedY += selectedY < 3 ? 1 : 0;
                             break;
                         case ConsoleKey.Enter:
-                        {
-                            Command cmd = CommandDeclarations.Commands[operations[selectedX, selectedY]];
-                            List<string> p = new List<string>();
-                            Console.Clear();
-                            if(cmd.ParameterTokens.Length > 0)
                             {
-                                WhiteBack();
-                                Console.WriteLine("    {0,-30}    ","[Parameters] Enter operation parameters");
+                                Command cmd = CommandDeclarations.Commands[operations[selectedX, selectedY]];
+                                List<string> p = new List<string>();
+                                Console.Clear();
+                                if (cmd.ParameterTokens.Length > 0)
+                                {
+                                    WhiteBack();
+                                    Console.WriteLine("    {0,-30}    ", "[Parameters] Enter operation parameters");
+                                    BlackBack();
+
+                                    Console.WriteLine(string.Join(' ', cmd.ParameterTokens));
+                                    Console.Write("~: ");
+
+                                    string[] input = Console.ReadLine().Split(' ');
+                                    Console.ResetColor();
+
+                                    p = new List<string>(input);
+                                }
+                                commandSelected = true;
+
+
+                                Console.Clear();
+
+
                                 BlackBack();
 
-                                Console.WriteLine(string.Join(' ', cmd.ParameterTokens));
-                                Console.Write("~: ");
+                                CommandDeclarations.Commands[operations[selectedX, selectedY]].Operation(manager, p);
 
-                                string[] input = Console.ReadLine().Split(' ');
-                                Console.ResetColor();
+                                WhiteBack();
+                                Console.WriteLine("[Any] to return operation selection");
+                                BlackBack();
+                                Console.ReadKey();
 
-                                p = new List<string>(input);
+                                break;
                             }
-                            commandSelected = true;
-
-                            
-                            Console.Clear();
-                            
-
-                            BlackBack();
-
-                            CommandDeclarations.Commands[operations[selectedX, selectedY]].Operation(manager, p);
-                            
-                            WhiteBack();
-                            Console.WriteLine("[Any] to return operation selection");
-                            BlackBack();
-                            Console.ReadKey();
-
-                            break;
-                        }
                         default:
                             {
+                                KeyTyped = true;
                                 break;
                             }
                     }
 
-                    
+
                 }
             };
         }
@@ -115,7 +147,7 @@ namespace PrintHub.Framework.Commands
 
         public void BlackBack()
         {
-            Console.ResetColor();   
+            Console.ResetColor();
         }
     }
 }
