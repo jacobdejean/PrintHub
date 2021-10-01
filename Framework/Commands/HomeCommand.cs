@@ -8,6 +8,7 @@ namespace PrintHub.Framework.Commands
     {
         public HomeCommand()
         {
+            Description = "Operation selection";
             ParameterTokens = new string[] { };
             Operation = (manager, parameters) =>
             {
@@ -20,15 +21,13 @@ namespace PrintHub.Framework.Commands
 
                 bool CommandSelected = false;
 
-                Page home = new Page(PageLayout.Grid, "  {0,-10}  ", operations);
-
-                home.SetHeader("Home", "Choose an operation below");
-                home.SetFooter("to exit", "to execute operation");
-
-                home.IncludeBranding = true;
-
                 while (!CommandSelected)
                 {
+                    Page home = new Page(PageLayout.Grid, "  {0,-10}  ", operations);
+
+                    home.SetHeader("Home", "Choose an operation below");
+                    home.SetFooter("to exit", "to execute operation");
+
                     Coordinate selection = home.Execute();
                     
                     if(selection.X == -1)
@@ -59,7 +58,7 @@ namespace PrintHub.Framework.Commands
 
                         p = new List<string>(input);
                     }
-                    CommandSelected = true;
+                    
                     CommandDeclarations.Commands[operations[selection.X, selection.Y, 0]].Operation(manager, p);
                 }
                 manager.QuitFlag = true;
