@@ -4,7 +4,7 @@ namespace PrintHub.Framework.Commands.GUI
     {
         public int X;
         public int Y;
-        public static Coordinate Empty =  new Coordinate(-1, -1);
+        public static Coordinate Empty =  new Coordinate(-1, 0);
 
         public Coordinate(int X, int Y)
         {

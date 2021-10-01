@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PrintHub.Framework.Commands.GUI;
 
 namespace PrintHub.Framework.Commands
 {
@@ -14,14 +15,18 @@ namespace PrintHub.Framework.Commands
                 bool finished = false;
                 while(!finished)
                 {
-                    Console.Clear();
-                    Console.WriteLine(@" _                     
-                                        /_/ _ . _ _/_ /_/    /_
-                                       /   / / / //  / / /_//_/ by Jacob DeJean");
+                    string[,,] commands = new string[CommandDeclarations.Commands.Keys.Count, 1, 2];
 
-                    WhiteBack();
+                    int i = 0; 
+                    foreach(KeyValuePair<string, Command> kvp in CommandDeclarations.Commands)
+                    {
+                        commands[i, 0, 0] = kvp.Key;
+                        commands[i, 0, 1] = kvp.Value.Description;
+                        i++;
+                    }
+
+                    Page help = new Page(PageLayout.List, " {0} ", ) 
                     Console.WriteLine("    {0,-30}    ","[Help] View usage information below");
-                    BlackBack();
                     
                     foreach(KeyValuePair<string, Command> kvp in CommandDeclarations.Commands)
                     {
