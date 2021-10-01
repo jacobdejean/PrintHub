@@ -30,6 +30,12 @@ namespace PrintHub.Framework.Commands
                 while (!CommandSelected)
                 {
                     Coordinate selection = home.Execute();
+                    
+                    if(selection.X == -1)
+                    {
+                        CommandSelected = true;
+                        break;
+                    }
 
                     Command cmd = CommandDeclarations.Commands[operations[selection.X, selection.Y, 0]];
 
@@ -40,6 +46,8 @@ namespace PrintHub.Framework.Commands
                         Page parameterPage = new Page(PageLayout.Info, "{0}", new string[,,] 
                         { { { string.Join(' ', cmd.ParameterTokens) } }});
 
+                        parameterPage.WaitOnInfo = false;
+
                         parameterPage.SetHeader(operations[selection.X, selection.Y, 0], " Enter parameters");
 
                         parameterPage.Execute();
@@ -48,31 +56,14 @@ namespace PrintHub.Framework.Commands
                         Console.Write("~: ");
 
                         string[] input = Console.ReadLine().Split(' ');
-                        Console.ResetColor();
 
                         p = new List<string>(input);
                     }
-                    commandSelected = true;
-                    CommandDeclarations.Commands[operations[selectedX, selectedY]].Operation(manager, p);
+                    CommandSelected = true;
+                    CommandDeclarations.Commands[operations[selection.X, selection.Y, 0]].Operation(manager, p);
                 }
                 manager.QuitFlag = true;
-
-                /*
-                
-
-                */
             };
-        }
-
-        public void WhiteBack()
-        {
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.BackgroundColor = ConsoleColor.White;
-        }
-
-        public void BlackBack()
-        {
-            Console.ResetColor();
         }
     }
 }

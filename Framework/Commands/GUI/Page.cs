@@ -12,6 +12,7 @@ namespace PrintHub.Framework.Commands.GUI
         public int SelectedX;
         public int SelectedY;
         public bool ExitPage;
+        public bool WaitOnInfo;
         public bool IncludeBranding;
         private string _branding = @"  _                     " + "\n" + @" /_/ _ . _ _/_ /_/    /_" + "\n" + @"/   / / / //  / / /_//_/ by Jacob DeJean";
 
@@ -22,7 +23,7 @@ namespace PrintHub.Framework.Commands.GUI
             this.Elements = new PageElement[Contents.GetLength(0), Contents.GetLength(1)];
 
             CreateElements(ContentFormatting, Contents);
-            
+
             ExitPage = false;
         }
 
@@ -53,7 +54,12 @@ namespace PrintHub.Framework.Commands.GUI
                     Console.WriteLine(_branding);
 
                 Header.Print();
+
                 Print();
+
+                if (Layout == PageLayout.Info && !WaitOnInfo)
+                    return Choice;
+
                 Footer.ForEach((p) => p.Print());
 
                 ConsoleKey key = Console.ReadKey().Key;
@@ -75,6 +81,7 @@ namespace PrintHub.Framework.Commands.GUI
                     case ConsoleKey.Enter:
                         {
                             Choice = new Coordinate(SelectedX, SelectedY);
+                            ExitPage = true;
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -92,9 +99,9 @@ namespace PrintHub.Framework.Commands.GUI
 
         public void CreateElements(string formatting, string[,,] contents)
         {
-            for(int x = 0; x < Elements.GetLength(0); x++)
+            for (int x = 0; x < Elements.GetLength(0); x++)
             {
-                for(int y = 0; y < Elements.GetLength(1); y++)
+                for (int y = 0; y < Elements.GetLength(1); y++)
                 {
                     Elements[x, y] = new PageElement(formatting, ExtractZ(x, y, contents));
                 }
@@ -105,7 +112,7 @@ namespace PrintHub.Framework.Commands.GUI
         {
             string[] buffer = new string[content.GetLength(2)];
 
-            for(int i = 0; i < content.GetLength(2); i++)
+            for (int i = 0; i < content.GetLength(2); i++)
             {
                 buffer[i] = content[x, y, i];
             }
@@ -148,12 +155,23 @@ namespace PrintHub.Framework.Commands.GUI
 
         public void List()
         {
+            for (int x = 0; x < Elements.GetLength(0); x++)
+            {
+                PageElement element = Elements[x, 0];
 
+                element.Highlight = SelectedX == x;
+
+                element.Print();
+
+                Console.Write("\n");
+            }
         }
 
         public void Info()
         {
+            PageElement element = Elements[0, 0];
 
+            element.Print();
         }
     }
 }
