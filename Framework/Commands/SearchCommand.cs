@@ -45,6 +45,8 @@ namespace PrintHub.Framework.Commands
                 {
                     Console.WriteLine("    ~" + f.GetFileName());
                 }
+
+                Console.ReadKey();
             };
         }
     }

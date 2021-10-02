@@ -47,6 +47,7 @@ namespace PrintHub.Framework.Commands.GUI
 
             while (!ExitPage)
             {
+                Console.ResetColor();
                 Console.Clear();
 
                 if (IncludeBranding)
