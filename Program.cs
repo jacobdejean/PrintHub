@@ -9,7 +9,7 @@ namespace PrintHub
     class Program
     {
         [DllImport ("libc")]
-        private static extern int system (string exec);
+        public static extern int system (string exec);
 
         static void Main(string[] args)
         {
@@ -19,9 +19,6 @@ namespace PrintHub
             if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 system(@"printf '\e[8;15;50t'");
-                system(@"printf '\e[?4h'");
-                system(@"printf '\e[31m'");
-                system(@"printf '\e]50;#6\a'");
                 //system(@"printf '\e[9;1t'");
             }
 

@@ -21,7 +21,7 @@ namespace PrintHub.Framework.Commands.GUI
 
         public void Print()
         {
-            /*
+            
             if (Highlight)
             {
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -29,7 +29,7 @@ namespace PrintHub.Framework.Commands.GUI
             }
             else
                 Console.ResetColor();
-*/
+
             //if (Color.HasValue)
              //   Console.ForegroundColor = Color.Value;
 
