@@ -1,19 +1,13 @@
 # PrintHub
  Gcode version control and print farm distribution tool.
 
- In active feature development.
+ In active feature development. Few things work right now.
 
 ## Roadmap
 1. Commandline feature complete
-2. GUI Conversion
+2. GUI
 3. Implementation on hardware
 4. Team collaboration
-
-## Developer Features
-- Extensible command palatte
-- Back-end isolation to support various interaction implementations
-- State validation for various systems (important futureproofing for Roadmap #3)
-- Internal event logging for useful dumps and issue tracking
 
 ## Usage / User Features
 ### Commands
