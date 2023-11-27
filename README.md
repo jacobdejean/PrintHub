@@ -9,7 +9,7 @@
 3. Implementation on hardware
 4. Team collaboration
 
-## Usage / User Features
-### Commands
+## Example usage
+
 `display -tracked -archived -all`
 
